@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanDive Bali - Firebase</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+<nav class="bg-cyan-900 text-white sticky top-0 z-50 shadow-md">
+<div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+<div class="flex items-center gap-2 cursor-pointer" onclick="showPage('website')"><i class="fa-solid fa-water text-cyan-400 text-2xl"></i><span class="text-xl font-bold">Ocean<span class="text-cyan-400">Dive</span> <span class="text-xs bg-green-500 px-2 py-1 rounded-full">☁️ FIREBASE</span></span></div>
+<div class="hidden md:flex gap-8 text-sm font-medium"><a href="#home" onclick="showPage('website')">Beranda</a><a href="#video" onclick="showPage('website')">Video</a><a href="#services" onclick="showPage('website')">Kursus & Paket</a><a href="#destinations" onclick="showPage('website')">Destinasi</a><a href="#booking" onclick="showPage('website')">Booking</a></div>
+<div class="flex gap-2"><a href="#booking" onclick="showPage('website')" class="bg-cyan-500 px-4 py-2 rounded-full text-sm font-semibold">Pesan Sekarang</a><button onclick="showPage('dashboard')" class="bg-white/10 border border-white/30 px-4 py-2 rounded-full text-sm font-semibold">Dashboard</button></div>
+</div>
+</nav>
+
+<div id="page-website">
+<!-- HERO - BEB, INI UDAH ADA VIDEO CONTOH NYA BEB, GAK HILANG LAGI BEB -->
+<header id="home" class="relative h-[92vh] flex items-center justify-center text-center overflow-hidden bg-cyan-950">
+<video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=80" class="absolute inset-0 w-full h-full object-cover z-0">
+<source id="heroSource1" src="https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4" type="video/mp4">
+</video>
+<div class="absolute inset-0 bg-cyan-950/60 z-10"></div>
+<div class="relative z-20 max-w-3xl mx-auto px-4 space-y-6 text-white">
+<span class="bg-green-500/30 text-green-300 border border-green-400/30 px-3 py-1 rounded-full text-xs font-semibold" id="firebase-status">☁️ Loading Firebase beb...</span>
+<h1 class="text-4xl md:text-6xl font-extrabold">Temukan Keajaiban Dunia Bawah Laut</h1>
+<p class="text-lg text-slate-200">Nikmati pengalaman menyelam tak terlupakan bersama instruktur profesional bersertifikat internasional.</p>
+<div class="flex justify-center gap-4 flex-wrap"><a href="#video" class="bg-red-600 px-6 py-3 rounded-xl font-medium">▶ Tonton Video</a><a href="#services" class="bg-cyan-500 px-6 py-3 rounded-xl font-medium">Lihat Paket Trip</a><a href="#destinations" class="bg-white/10 border border-white/30 px-6 py-3 rounded-xl">Jelajahi Spot</a></div>
+<div class="flex justify-center gap-6 text-sm"><div><p class="text-2xl font-bold" id="stat-paket">3</p><p class="text-slate-300">Paket</p></div><div><p class="text-2xl font-bold" id="stat-video">3</p><p class="text-slate-300">Video</p></div><div><p class="text-2xl font-bold" id="stat-destinasi">3</p><p class="text-slate-300">Destinasi</p></div><div><p class="text-2xl font-bold">4.9 ⭐</p><p class="text-slate-300">Rating</p></div></div>
+</div>
+<button onclick="toggleHero()" class="absolute bottom-6 right-6 z-20 bg-black/50 text-white w-12 h-12 rounded-full"><i id="heroIcon" class="fa-solid fa-pause"></i></button>
+</header>
+
+<section id="video" class="py-20 max-w-7xl mx-auto px-4">
+<div class="text-center mb-10"><span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold">🎬 VIDEO DIVING</span><h2 class="text-3xl font-bold text-cyan-950 mt-3">Lihat Keseruan Menyelam Bareng Kami</h2><p class="text-slate-500">Klik video kecil di kanan beb, langsung ganti video gede nya beb.</p></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2">
+<div class="relative rounded-3xl overflow-hidden shadow-lg bg-black aspect-video">
+<video id="mainVideo" controls playsinline preload="metadata" poster="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80" class="w-full h-full">
+<source id="mainVideoSource" src="https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4" type="video/mp4">
+</video>
+</div>
+<h3 id="mainVideoTitle" class="text-xl font-bold mt-4">🌊 Laut - Ombak & Diving</h3>
+<p id="mainVideoDesc" class="text-slate-500 text-sm mt-1">Video contoh beb, kalo beb udah upload beb, langsung ganti beb.</p>
+<a href="#booking" class="inline-block mt-4 bg-cyan-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold">Booking Trip Ini →</a>
+</div>
+<div><p class="font-bold text-sm text-slate-500 uppercase mb-3">Video Lainnya - Klik Beb</p><div id="videoList" class="space-y-4"></div>
+<div class="bg-green-50 border border-green-200 rounded-2xl p-4 text-sm mt-4"><p class="font-bold">✅ Kalo kosong beb?</p><p class="text-slate-600 mt-1">Pencet Dashboard beb → <b>Isi Data Contoh ke Firebase</b> beb, langsung muncul beb!</p></div>
+</div>
+</div>
+</section>
+
+<section id="services" class="py-20 max-w-7xl mx-auto px-4"><div class="text-center mb-10"><h2 class="text-3xl font-bold text-cyan-950">Pilihan Kursus & Paket Trip</h2></div><div id="paketList" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div></section>
+<section id="destinations" class="bg-slate-100 py-20 px-4"><div class="max-w-7xl mx-auto"><div class="text-center mb-10"><h2 class="text-3xl font-bold text-cyan-950">Destinasi Menyelam Unggulan</h2></div><div id="destinasiList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div></div></section>
+<section id="booking" class="py-20 max-w-3xl mx-auto px-4"><div class="bg-white rounded-3xl shadow-lg border p-8"><h2 class="text-3xl font-bold text-cyan-950 text-center mb-6">Formulir Pemesanan Cepat</h2><form id="bookingForm" onsubmit="handleBooking(event)" class="space-y-4"><input id="name" required placeholder="Nama Lengkap" class="w-full px-4 py-3 rounded-xl border"><input id="phone" required placeholder="No WA 081..." class="w-full px-4 py-3 rounded-xl border"><select id="package" class="w-full px-4 py-3 rounded-xl border"></select><input type="date" id="date" required class="w-full px-4 py-3 rounded-xl border"><input type="number" id="jumlah" min="1" value="1" class="w-full px-4 py-3 rounded-xl border"><button class="w-full bg-cyan-600 text-white font-semibold py-3.5 rounded-xl">Kirim Reservasi via WhatsApp</button></form><div id="successAlert" class="hidden mt-4 bg-emerald-50 border p-4 rounded-xl text-center font-bold">Reservasi Berhasil Dikirim ke Firebase beb!</div></div></section>
+<footer class="bg-cyan-950 text-slate-400 py-10 text-center text-sm">© 2026 OceanDive Bali - Firebase restopro2026</footer>
+</div>
+
+<div id="page-dashboard" class="hidden max-w-7xl mx-auto px-4 py-10">
+<div class="flex flex-wrap justify-between gap-4 mb-8"><div><h1 class="text-3xl font-bold">Dashboard OceanDive - Firebase ☁️</h1><p class="text-slate-500 text-sm" id="dash-status">Save langsung ke Cloud beb, bukan LocalStorage lagi beb!</p></div><div class="flex gap-2 flex-wrap"><button onclick="showPage('website')" class="bg-cyan-600 text-white px-4 py-2 rounded-full text-sm font-semibold">👁️ Lihat Website</button><button onclick="seedFirebase()" class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold">✨ Isi Data Contoh ke Firebase</button><button onclick="migrateLocalToFirebase()" class="bg-amber-400 text-black px-4 py-2 rounded-full text-sm font-bold">⬆️ Pindah Data Lama</button></div></div>
+
+<div class="bg-gradient-to-r from-violet-600 to-cyan-600 text-white rounded-3xl p-6 mb-8">
+<h2 class="text-lg font-bold">🗜️ Setting Kompress Beb</h2>
+<div class="flex flex-wrap gap-2 mt-4">
+<button onclick="setQuality('hemat')" id="q-hemat" class="bg-white/20 border border-white/40 px-4 py-2 rounded-full text-sm font-bold">📉 Hemat - 480p</button>
+<button onclick="setQuality('pas')" id="q-pas" class="bg-white text-violet-700 px-4 py-2 rounded-full text-sm font-bold">⚖️ Pas - 720p ⭐</button>
+<button onclick="setQuality('jernih')" id="q-jernih" class="bg-white/20 border border-white/40 px-4 py-2 rounded-full text-sm font-bold">✨ Jernih - 1080p</button>
+</div><p class="text-xs mt-3" id="quality-info">Saat ini: <b>Pas - 720p</b> beb!</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="space-y-8">
+<div class="bg-white rounded-3xl shadow border p-6 border-cyan-100">
+<h2 class="text-xl font-bold mb-1">🖼️ Background - Pilih File → Kompress → Firebase</h2>
+<div class="bg-cyan-50 border-2 border-dashed border-cyan-300 rounded-2xl p-6 text-center">
+<p class="text-4xl">📁</p>
+<input type="file" id="hero-file" accept="video/*" class="hidden" onchange="handleHeroFile(this)">
+<button onclick="document.getElementById('hero-file').click()" class="mt-4 bg-cyan-600 text-white px-6 py-3 rounded-xl font-bold text-sm">📁 Pilih File Dari Galeri</button>
+<p id="hero-file-name" class="text-xs font-bold text-cyan-700 mt-3">Belum ada file beb</p>
+<div id="hero-progress-wrap" class="hidden mt-3"><div class="flex justify-between text-xs font-bold"><span id="hero-progress-text">...</span><span id="hero-progress-pct">0%</span></div><div class="w-full bg-slate-200 rounded-full h-3 mt-1 overflow-hidden"><div id="hero-progress-bar" class="bg-cyan-600 h-3" style="width:0%"></div></div><p id="hero-size-info" class="text-xs text-slate-500 mt-1"></p></div>
+</div>
+</div>
+
+<div class="bg-white rounded-3xl shadow border p-6 border-red-100">
+<h2 class="text-xl font-bold mb-1">🎬 Tambah Video - Pilih File → Kompress → Firebase</h2>
+<form onsubmit="saveVideo(event)" class="space-y-4"><input type="hidden" id="video-id">
+<div><label class="block text-sm font-medium mb-1">Judul Video *</label><input id="video-judul" required placeholder="Manta Point - Nusa Penida" class="w-full px-4 py-3 rounded-xl border"></div>
+<div><label class="block text-sm font-medium mb-1">File Video *</label><div class="border-2 border-dashed border-red-200 rounded-2xl p-4 text-center bg-red-50/50"><input type="file" id="video-file" accept="video/*" class="hidden" onchange="handleVideoFile(this)"><button type="button" onclick="document.getElementById('video-file').click()" class="mt-2 bg-red-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm">📁 Pilih File Video Dari Galeri</button><p id="video-file-name" class="text-xs font-bold text-red-700 mt-2">Belum ada file beb</p><div id="video-progress-wrap" class="hidden mt-3"><div class="flex justify-between text-xs font-bold"><span id="video-progress-text">...</span><span id="video-progress-pct">0%</span></div><div class="w-full bg-slate-200 rounded-full h-3 mt-1 overflow-hidden"><div id="video-progress-bar" class="bg-red-600 h-3" style="width:0%"></div></div><p id="video-size-info" class="text-xs text-slate-500 mt-1"></p></div><video id="video-preview" controls muted playsinline class="hidden w-full h-32 object-cover rounded-xl mt-3 bg-black"></video></div></div>
+<div><label class="block text-sm font-medium mb-1">Deskripsi</label><textarea id="video-deskripsi" rows="2" class="w-full px-4 py-3 rounded-xl border"></textarea></div>
+<div class="flex gap-2"><button class="flex-1 bg-red-600 text-white font-semibold py-3 rounded-xl" id="btn-save-video">☁️ + Tambah Video ke Firebase</button><button type="button" onclick="clearVideoForm()" class="bg-slate-100 px-4 py-3 rounded-xl">Batal</button></div>
+</form>
+<h3 class="font-bold mt-6 mb-3">Daftar Video (<span id="count-video">0</span>)</h3><div id="adminVideoList" class="space-y-3"></div>
+</div>
+
+<div class="bg-white rounded-3xl shadow border p-6"><h2 class="text-xl font-bold mb-4">➕ Tambah Paket - Firebase</h2><form onsubmit="savePaket(event)" class="space-y-3"><input id="paket-nama" required placeholder="Nama Paket" class="w-full px-4 py-3 rounded-xl border"><input id="paket-harga" type="number" required placeholder="Harga Rp" class="w-full px-4 py-3 rounded-xl border"><input id="paket-foto" placeholder="Link Foto" class="w-full px-4 py-3 rounded-xl border"><textarea id="paket-deskripsi" rows="2" placeholder="Deskripsi" class="w-full px-4 py-3 rounded-xl border"></textarea><button class="w-full bg-cyan-600 text-white py-3 rounded-xl font-semibold">☁️ + Tambah Paket ke Firebase</button></form><div id="adminPaketList" class="space-y-3 mt-6"></div></div>
+</div>
+<div class="space-y-8">
+<div class="bg-white rounded-3xl shadow border p-6"><h2 class="text-xl font-bold mb-4">📍 Tambah Destinasi - Firebase</h2><form onsubmit="saveDestinasi(event)" class="space-y-3"><input id="dest-nama" required placeholder="Nama Destinasi" class="w-full px-4 py-3 rounded-xl border"><input id="dest-foto" placeholder="Link Foto" class="w-full px-4 py-3 rounded-xl border"><textarea id="dest-deskripsi" rows="2" placeholder="Deskripsi" class="w-full px-4 py-3 rounded-xl border"></textarea><button class="w-full bg-emerald-600 text-white py-3 rounded-xl font-semibold">☁️ + Tambah Destinasi ke Firebase</button></form><div id="adminDestList" class="space-y-3 mt-6"></div></div>
+<div class="bg-white rounded-3xl shadow border p-6"><h2 class="text-xl font-bold">💬 Booking Masuk (<span id="dash-total-booking">0</span>)</h2><div id="bookingList" class="space-y-3 mt-4"></div></div>
+</div>
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+// ===== BEB, GANTI INI BEB PAKE CONFIG RESTOPRO2026 BEB YANG ASLI BEB =====
+const firebaseConfig = {
+  apiKey: "AIzaSy...GANTI_BEB...",
+  authDomain: "restopro2026.firebaseapp.com",
+  projectId: "restopro2026",
+  storageBucket: "restopro2026.appspot.com",
+  messagingSenderId: "xxx",
+  appId: "xxx"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+const paketRef = collection(db, "oceandive_paket");
+const destRef = collection(db, "oceandive_destinasi");
+const videoRef = collection(db, "oceandive_video");
+const bookingRef = collection(db, "oceandive_booking");
+const heroRef = doc(db, "oceandive_settings", "hero");
+
+// ===== DATA CONTOH BEB - INI YANG BIKIN GAK KOSONG LAGI BEB =====
+const defaultPaket=[
+{id:1,nama:"Discovery Scuba Dive",harga:1200000,deskripsi:"Belajar dasar menyelam didampingi instruktur.",foto:"https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80"},
+{id:2,nama:"PADI Open Water",harga:5500000,deskripsi:"Kursus lengkap bersertifikat internasional.",foto:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80"},
+{id:3,nama:"Nusa Penida Fun Dive",harga:1800000,deskripsi:"2x penyelaman di Manta Point & Crystal Bay.",foto:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"}];
+const defaultDestinasi=[
+{id:1,nama:"Tulamben, Bali",deskripsi:"Bangkai kapal USAT Liberty.",foto:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80"},
+{id:2,nama:"Nusa Penida",deskripsi:"Rumah Pari Manta & Mola-mola.",foto:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"},
+{id:3,nama:"Komodo National Park",deskripsi:"Terumbu karang kelas dunia.",foto:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"}];
+const defaultVideo=[
+{judul:"🌊 Laut - Ombak & Diving",deskripsi:"Video laut ombak beb.",mp4:"https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4",poster:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80"},
+{judul:"🐠 Diving - Ikan & Terumbu Karang",deskripsi:"Diving liat ikan beb.",mp4:"https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4",poster:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=400&q=80"},
+{judul:"🏝️ Pantai Bali - Pasir Putih",deskripsi:"Pantai Bali beb.",mp4:"https://cdn.pixabay.com/video/2019/10/09/27725-365890983_large.mp4",poster:"https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=400&q=80"}];
+
+let paketList=[...defaultPaket];
+let destinasiList=[...defaultDestinasi];
+let videoList=[...defaultVideo];
+let bookingList=[];
+let tempVideoFile=null;
+let compressSetting={maxW:720,maxH:720,bitrate:1200000,label:'Pas - 720p'};
+let seeded=false;
+
+window.setQuality=(q)=>{
+  document.getElementById('q-hemat').className='bg-white/20 border border-white/40 px-4 py-2 rounded-full text-sm font-bold';
+  document.getElementById('q-pas').className='bg-white/20 border border-white/40 px-4 py-2 rounded-full text-sm font-bold';
+  document.getElementById('q-jernih').className='bg-white/20 border border-white/40 px-4 py-2 rounded-full text-sm font-bold';
+  if(q==='hemat'){compressSetting={maxW:480,maxH:480,bitrate:600000,label:'Hemat - 480p'};document.getElementById('q-hemat').className='bg-white text-violet-700 px-4 py-2 rounded-full text-sm font-bold';}
+  if(q==='pas'){compressSetting={maxW:720,maxH:720,bitrate:1200000,label:'Pas - 720p'};document.getElementById('q-pas').className='bg-white text-violet-700 px-4 py-2 rounded-full text-sm font-bold';}
+  if(q==='jernih'){compressSetting={maxW:1080,maxH:1080,bitrate:2500000,label:'Jernih - 1080p'};document.getElementById('q-jernih').className='bg-white text-violet-700 px-4 py-2 rounded-full text-sm font-bold';}
+  document.getElementById('quality-info').innerHTML='Saat ini: <b>'+compressSetting.label+'</b> beb!';
+};
+const formatMB=b=>(b/1024/1024).toFixed(1)+' MB';
+const formatRp=n=>'Rp '+Number(n).toLocaleString('id-ID');
+
+async function compressVideo(file,onProgress){
+  return new Promise(async(resolve)=>{
+    if(file.size < 15*1024*1024){onProgress(100,'File udah kecil beb');resolve(file);return;}
+    const url=URL.createObjectURL(file);
+    const video=document.createElement('video');video.src=url;video.muted=true;video.playsInline=true;
+    await new Promise(r=>video.onloadedmetadata=r);
+    let w=video.videoWidth,h=video.videoHeight;
+    let scale=Math.min(1,compressSetting.maxW/w,compressSetting.maxH/h);
+    w=Math.floor(w*scale/2)*2;h=Math.floor(h*scale/2)*2;
+    const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+    const ctx=canvas.getContext('2d');
+    const stream=canvas.captureStream(30);
+    let mime='video/webm;codecs=vp9';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';if(!MediaRecorder.isTypeSupported(mime))mime='';
+    let recorder;try{recorder=new MediaRecorder(stream,{mimeType:mime||undefined,videoBitsPerSecond:compressSetting.bitrate});}catch(e){resolve(file);return;}
+    const chunks=[];recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
+    recorder.onstop=()=>{URL.revokeObjectURL(url);const blob=new Blob(chunks,{type:'video/webm'});resolve(new File([blob],'compressed_'+Date.now()+'.webm',{type:'video/webm'}));};
+    video.play();let raf;function draw(){if(video.ended||video.paused)return;ctx.drawImage(video,0,0,w,h);onProgress(Math.min(99,Math.floor(video.currentTime/video.duration*100)),'Kompress beb '+Math.floor(video.currentTime/video.duration*100)+'% beb...');raf=requestAnimationFrame(draw);}
+    recorder.start(500);draw();video.onended=()=>{cancelAnimationFrame(raf);setTimeout(()=>{try{recorder.stop();}catch(e){}},200);};
+    setTimeout(()=>{if(recorder.state!=='inactive'){video.pause();try{recorder.stop();}catch(e){}}},95000);
+  });
+}
+async function uploadToFirebase(file, folder){
+  const fileName = folder + '/' + Date.now() + '_' + file.name;
+  const storageRef = ref(storage, fileName);
+  await uploadBytes(storageRef, file);
+  return await getDownloadURL(storageRef);
+}
+
+window.showPage=(p)=>{document.getElementById('page-website').classList.toggle('hidden',p!=='website');document.getElementById('page-dashboard').classList.toggle('hidden',p!=='dashboard');window.scrollTo({top:0,behavior:'smooth'});if(p==='dashboard')renderAdmin();};
+window.toggleHero=()=>{const v=document.getElementById('heroVideo');if(v.paused)v.play();else v.pause();};
+
+window.handleHeroFile=async(input)=>{
+  const file=input.files[0];if(!file)return;
+  document.getElementById('hero-progress-wrap').classList.remove('hidden');
+  document.getElementById('hero-file-name').innerText='⏳ Kompress beb: '+file.name+' ('+formatMB(file.size)+') beb...';
+  const compressed=await compressVideo(file,(pct,txt)=>{document.getElementById('hero-progress-bar').style.width=pct+'%';document.getElementById('hero-progress-pct').innerText=pct+'%';document.getElementById('hero-progress-text').innerText=txt;});
+  document.getElementById('hero-file-name').innerText='☁️ Upload ke Firebase beb: '+formatMB(compressed.size)+' beb, tunggu beb...';
+  try{
+    const url=await uploadToFirebase(compressed,'oceandive/hero');
+    await setDoc(heroRef,{mp4:url,updated:new Date()});
+    document.getElementById('hero-size-info').innerText='Awal: '+formatMB(file.size)+' → Sesudah: '+formatMB(compressed.size)+' beb! Udah di Cloud beb!';
+    document.getElementById('hero-file-name').innerText='✅ Berhasil beb! Background udah di Firebase beb!';
+    alert('Background berhasil save ke Firebase beb! ✅');
+  }catch(e){alert('Gagal upload beb, cek Rules Firebase beb! Error: '+e.message);}
+};
+window.handleVideoFile=async(input)=>{
+  const file=input.files[0];if(!file)return;
+  document.getElementById('video-progress-wrap').classList.remove('hidden');
+  document.getElementById('video-file-name').innerText='⏳ Kompress beb: '+file.name+' ('+formatMB(file.size)+') beb...';
+  const compressed=await compressVideo(file,(pct,txt)=>{document.getElementById('video-progress-bar').style.width=pct+'%';document.getElementById('video-progress-pct').innerText=pct+'%';document.getElementById('video-progress-text').innerText=txt;});
+  tempVideoFile=compressed;
+  document.getElementById('video-size-info').innerText='Awal: '+formatMB(file.size)+' → Sesudah: '+formatMB(compressed.size)+' beb! Tinggal pencet Tambah beb!';
+  document.getElementById('video-file-name').innerText='✅ Siap beb: '+formatMB(file.size)+' → '+formatMB(compressed.size)+' beb!';
+  const pv=document.getElementById('video-preview');pv.src=URL.createObjectURL(compressed);pv.classList.remove('hidden');
+};
+window.saveVideo=async(e)=>{
+  e.preventDefault();
+  const id=document.getElementById('video-id').value;
+  const judul=document.getElementById('video-judul').value;
+  const desc=document.getElementById('video-deskripsi').value;
+  if(!id && !tempVideoFile){alert('Beb, pilih file dulu beb!');return;}
+  let mp4="",poster="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=400&q=80";
+  if(tempVideoFile){
+    document.getElementById('video-file-name').innerText='☁️ Upload ke Firebase beb, tunggu beb...';
+    try{
+      mp4=await uploadToFirebase(tempVideoFile,'oceandive/videos');
+      try{const url=URL.createObjectURL(tempVideoFile);const vid=document.createElement('video');vid.src=url;vid.muted=true;await new Promise(r=>vid.onloadeddata=r);vid.currentTime=1;await new Promise(r=>vid.onseeked=r);const c=document.createElement('canvas');c.width=400;c.height=225;c.getContext('2d').drawImage(vid,0,0,400,225);poster=c.toDataURL('image/jpeg',0.7);}catch(err){}
+    }catch(err){alert('Gagal upload beb: '+err.message);return;}
+  }else if(id){const old=videoList.find(v=>v.id==id);if(old){mp4=old.mp4;poster=old.poster;}}
+  const data={judul,deskripsi:desc,mp4,poster,created:new Date()};
+  if(id){await updateDoc(doc(db,"oceandive_video",id),data);}else{await addDoc(videoRef,data);}
+  clearVideoForm();alert('Video berhasil save ke Firebase beb! ✅');
+};
+window.clearVideoForm=()=>{document.getElementById('video-id').value='';document.getElementById('video-judul').value='';document.getElementById('video-file').value='';document.getElementById('video-deskripsi').value='';document.getElementById('video-file-name').innerText='Belum ada file beb';document.getElementById('video-preview').classList.add('hidden');tempVideoFile=null;};
+window.editVideo=(id)=>{const v=videoList.find(x=>x.id==id);document.getElementById('video-id').value=v.id;document.getElementById('video-judul').value=v.judul;document.getElementById('video-deskripsi').value=v.deskripsi;document.getElementById('btn-save-video').innerText='💾 Simpan Perubahan ke Firebase';window.scrollTo({top:0,behavior:'smooth'});};
+window.deleteVideo=async(id)=>{if(confirm('Hapus video ini beb?')){await deleteDoc(doc(db,"oceandive_video",id));}};
+window.savePaket=async(e)=>{e.preventDefault();await addDoc(paketRef,{nama:document.getElementById('paket-nama').value,harga:Number(document.getElementById('paket-harga').value),deskripsi:document.getElementById('paket-deskripsi').value,foto:document.getElementById('paket-foto').value||"https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",created:new Date()});alert('Paket save ke Firebase beb! ✅');};
+window.deletePaket=async(id)=>{if(confirm('Hapus paket beb?'))await deleteDoc(doc(db,"oceandive_paket",id));};
+window.saveDestinasi=async(e)=>{e.preventDefault();await addDoc(destRef,{nama:document.getElementById('dest-nama').value,deskripsi:document.getElementById('dest-deskripsi').value,foto:document.getElementById('dest-foto').value||"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",created:new Date()});alert('Destinasi save ke Firebase beb! ✅');};
+window.deleteDestinasi=async(id)=>{if(confirm('Hapus destinasi beb?'))await deleteDoc(doc(db,"oceandive_destinasi",id));};
+window.handleBooking=async(e)=>{e.preventDefault();const data={nama:document.getElementById('name').value,phone:document.getElementById('phone').value,paket:document.getElementById('package').value,tanggal:document.getElementById('date').value,jumlah:Number(document.getElementById('jumlah').value),created:new Date()};try{await addDoc(bookingRef,data);}catch(err){}document.getElementById('successAlert').classList.remove('hidden');window.open(`https://wa.me/6281234567890?text=${encodeURIComponent('Halo OceanDive, saya '+data.nama+' mau booking '+data.paket)}`,'_blank');};
+window.selectPackage=()=>{document.getElementById('booking').scrollIntoView({behavior:'smooth'});};
+
+// ===== ISI DATA CONTOH BEB - INI TOMBOL NYA BEB, KALO KOSONG PENCET INI BEB =====
+window.seedFirebase=async()=>{
+  if(!confirm('Isi data contoh ke Firebase beb? Paket 3, Destinasi 3, Video 3 beb, langsung muncul beb!'))return;
+  try{
+    for(let p of defaultPaket) await addDoc(paketRef,{nama:p.nama,harga:p.harga,deskripsi:p.deskripsi,foto:p.foto});
+    for(let d of defaultDestinasi) await addDoc(destRef,{nama:d.nama,deskripsi:d.deskripsi,foto:d.foto});
+    for(let v of defaultVideo) await addDoc(videoRef,{judul:v.judul,deskripsi:v.deskripsi,mp4:v.mp4,poster:v.poster});
+    await setDoc(heroRef,{mp4:"https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4"});
+    alert('Berhasil beb! ✅ Data contoh udah masuk Firebase beb, cek website beb!');
+  }catch(e){alert('Gagal beb: '+e.message+' beb, cek Rules Firebase beb, harus allow read, write beb!');}
+};
+window.migrateLocalToFirebase=async()=>{
+  if(!confirm('Pindah data lama beb?'))return;
+  const oldPaket=JSON.parse(localStorage.getItem('oceandive_v4_paket')||'[]');
+  const oldDest=JSON.parse(localStorage.getItem('oceandive_v4_destinasi')||'[]');
+  const oldVideo=JSON.parse(localStorage.getItem('oceandive_v4_video')||'[]');
+  for(let p of oldPaket) await addDoc(paketRef,{nama:p.nama,harga:p.harga,deskripsi:p.deskripsi,foto:p.foto});
+  for(let d of oldDest) await addDoc(destRef,{nama:d.nama,deskripsi:d.deskripsi,foto:d.foto});
+  for(let v of oldVideo) if(v.mp4) await addDoc(videoRef,{judul:v.judul,deskripsi:v.deskripsi,mp4:v.mp4,poster:v.poster});
+  alert('Data lama pindah beb! ✅');
+};
+
+function renderWebsite(){
+  document.getElementById('paketList').innerHTML=paketList.map(p=>`<div class="bg-white rounded-2xl shadow border overflow-hidden"><div class="h-48 bg-cover bg-center" style="background-image:url('${p.foto}')"></div><div class="p-6"><h3 class="text-xl font-bold">${p.nama}</h3><p class="text-slate-600 text-sm mt-2">${p.deskripsi}</p><div class="flex justify-between mt-4 pt-4 border-t"><span class="font-bold text-cyan-700">${formatRp(p.harga)}</span><button onclick="selectPackage()" class="bg-cyan-100 px-3 py-1.5 rounded-lg text-sm font-semibold">Pilih</button></div></div></div>`).join('');
+  document.getElementById('destinasiList').innerHTML=destinasiList.map(d=>`<div class="relative rounded-2xl overflow-hidden h-80 bg-cover bg-center flex items-end p-6" style="background-image:url('${d.foto}')"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div><div class="relative text-white"><h3 class="text-2xl font-bold">${d.nama}</h3><p class="text-sm">${d.deskripsi}</p></div></div>`).join('');
+  document.getElementById('package').innerHTML=paketList.map(p=>`<option>${p.nama} (${formatRp(p.harga)})</option>`).join('');
+  if(videoList.length>0){const f=videoList[0];document.getElementById('mainVideoSource').src=f.mp4;document.getElementById('mainVideo').load();document.getElementById('mainVideoTitle').innerText=f.judul;document.getElementById('mainVideoDesc').innerText=f.deskripsi;}
+  document.getElementById('videoList').innerHTML=videoList.map(v=>`<div onclick="playVideo('${v.id}')" class="flex gap-3 bg-white border rounded-2xl p-3 cursor-pointer hover:shadow-md"><div class="relative w-36 h-20 shrink-0 rounded-xl overflow-hidden bg-black"><img src="${v.poster}" class="w-full h-full object-cover"><div class="absolute inset-0 flex items-center justify-center"><span class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-xs">▶</span></div></div><div><p class="font-bold text-sm">${v.judul}</p><p class="text-xs text-slate-500 mt-1">${v.deskripsi}</p></div></div>`).join('');
+  document.getElementById('stat-paket').innerText=paketList.length;document.getElementById('stat-video').innerText=videoList.length;document.getElementById('stat-destinasi').innerText=destinasiList.length;document.getElementById('dash-total-booking').innerText=bookingList.length;document.getElementById('count-video').innerText=videoList.length;
+}
+window.playVideo=(id)=>{const v=videoList.find(x=>x.id==id);if(!v)return;document.getElementById('mainVideoSource').src=v.mp4;document.getElementById('mainVideo').load();document.getElementById('mainVideo').play();document.getElementById('mainVideoTitle').innerText=v.judul;document.getElementById('mainVideoDesc').innerText=v.deskripsi;document.getElementById('video').scrollIntoView({behavior:'smooth'});};
+function renderAdmin(){renderWebsite();document.getElementById('adminVideoList').innerHTML=videoList.map(v=>`<div class="flex justify-between gap-3 bg-slate-50 border rounded-xl p-3"><div class="flex gap-3"><img src="${v.poster}" class="w-20 h-14 rounded-lg object-cover bg-black"><div><p class="font-bold text-sm">${v.judul}</p><p class="text-xs text-slate-500">☁️ Firebase beb</p></div></div><div class="flex gap-1 shrink-0"><button onclick="editVideo('${v.id}')" class="bg-amber-100 px-3 py-1.5 rounded-lg text-xs font-bold">Edit</button><button onclick="deleteVideo('${v.id}')" class="bg-red-100 text-red-700 px-3 py-1.5 rounded-lg text-xs font-bold">Hapus</button></div></div>`).join('');document.getElementById('adminPaketList').innerHTML=paketList.map(p=>`<div class="flex justify-between bg-slate-50 border rounded-xl p-3"><p class="font-bold text-sm">${p.nama}</p><button onclick="deletePaket('${p.id}')" class="bg-red-100 px-3 py-1.5 rounded-lg text-xs font-bold">Hapus</button></div>`).join('');document.getElementById('adminDestList').innerHTML=destinasiList.map(d=>`<div class="flex justify-between bg-slate-50 border rounded-xl p-3"><p class="font-bold text-sm">${d.nama}</p><button onclick="deleteDestinasi('${d.id}')" class="bg-red-100 px-3 py-1.5 rounded-lg text-xs font-bold">Hapus</button></div>`).join('');document.getElementById('bookingList').innerHTML=bookingList.length?bookingList.map(b=>`<div class="bg-slate-50 border rounded-xl p-3 text-sm"><p class="font-bold">${b.nama}</p><p>${b.paket} - ${b.tanggal}</p></div>`).join(''):'Belum ada booking beb.';}
+
+// ===== REALTIME BEB - KALO FIREBASE KOSONG, PAKE DATA CONTOH BEB, JANGAN KOSONG BEB =====
+onSnapshot(paketRef,(snap)=>{
+  if(snap.empty){ /* biarin pake default beb, jangan kosong beb */ }
+  else{paketList=[];snap.forEach(d=>paketList.push({id:d.id,...d.data()}));}
+  renderWebsite();document.getElementById('firebase-status').innerText='☁️ Connected ke Firebase restopro2026 beb ✅';
+},(err)=>{document.getElementById('firebase-status').innerText='⚠️ Firebase belum connect beb, pake data contoh dulu beb - Cek config beb!';renderWebsite();});
+onSnapshot(destRef,(snap)=>{if(!snap.empty){destinasiList=[];snap.forEach(d=>destinasiList.push({id:d.id,...d.data()}));}renderWebsite();});
+onSnapshot(videoRef,(snap)=>{if(!snap.empty){videoList=[];snap.forEach(d=>videoList.push({id:d.id,...d.data()}));}renderWebsite();});
+onSnapshot(bookingRef,(snap)=>{bookingList=[];snap.forEach(d=>bookingList.push({id:d.id,...d.data()}));renderWebsite();});
+onSnapshot(heroRef,(snap)=>{if(snap.exists() && snap.data().mp4){document.getElementById('heroSource1').src=snap.data().mp4;document.getElementById('heroVideo').load();document.getElementById('heroVideo').play().catch(()=>{});}});
+
+renderWebsite();
+document.getElementById('date').min=new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
